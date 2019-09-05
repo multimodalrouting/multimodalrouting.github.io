@@ -1,18 +1,70 @@
-<html>
- <head>
-  <title>Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker</title>
- </head>
- <body>
-	 <p>Die Community um <a href="https://openstreetmap.org"><b>OpenStreetMap</b></a> und <a href="https://wheelmap.org"><b>Wheelmap</b></a> pflegt eine umfangreiche Sammlung <b>freier Daten über Barrierefreiheit</b>, die für <b>Rollstuhlfahrer und Lastenräder</b> sehr nützlich sind.</p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="polyglot-spa/vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="polyglot-spa/vendor/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="polyglot-spa/vendor/css/re-com.css">
 
-	 <p>Wir entwickeln eine Routingengine, die <b>Navigation für kombinierte Nutzung von nichtmotorisiertem Individualverkehr und öffentlichen Verkehrsmitteln</b> unterstützt.
-	 
-	 <p>Damit körperlich eingeschränkte Menschen <b>effizient und selbstständig</b> am Verkehr teilnehmen können, bemühen wir uns alle relevanten Informationen (z.B. <b>Wegbeschaffenheit, Hindernisse, nicht funktionierende Fahrstühle, Ausfälle/Umleitungen im ÖPNV</b>) zu berücksichtigen.</p>
+    <title>Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker</title>
+  </head>
+  <body>
+    <div id="menu"></div>
 
-  <center><img src="Logoentwurf.svg" height="50%"/></center>
+    <div class="page container-fluid" id="/home" menuentry="Home">
+      <div class="row">
+        <div class="panel col-md-6">
+          <div class="panel-body">
+            <p><h5 class="panel-title">Navigation für Rollstuhlfahrer</h5></p>
+            <p><img src="lego-prototyp.jpeg" class="card-img-top" width="100%"/></p>
+            <ul>
+              <li>Wir schreiben eine Navigationsanwendung, die Hindernisse visualisiert.</li>
+              <li>Du entscheidest welche Alternativroute für dich die beste ist.</li>
+              <li>Die Anwendung lernt aus deinen Entscheidungen um bei künftigen Routenvorschlägen auf deine Bedürfnisse einzugehen.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel col-md-6">
+          <div class="panel-body">
+            <p><h5 class="panel-title">Berücksichtigung vorhandener Daten</h5></p>
+            <p><img src="lego-prototyp.gif" class="card-img-top" width="100%"/></p>
+            <p>Unsere Anwendung schlägt ÖPNV-Verbindungen vor, achtet dabei auf Barrierefreien Ein-/Ausstieg und welche Fahrstühle derzeit funktionieren.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel col-md-6">
+          <div class="panel-body">
+            <p><h5 class="panel-title">Aktueller Stand</h5></p>
+            <p>Von September 2019 bis Februar 2020 werden wir im Rahmen des <a href="https://prototypefund.de/project/multimodale-routing-engine-fuer-rollstuhlfahrer-und-fahrradlogistiker/">Prototype Funds</a> gefördert.</p>
+            <p>Wir haben gerade erst mit dem Projekt begonnen. Alle Entwicklungen findest du auf <a href="https://github.com/multimodalrouting">Github</a>.</p>
+          </div>
+        </div>
+        <div class="panel col-md-6">
+          <div class="panel-body">
+            <p><h5 class="panel-title">Triff uns</h5></p>
+            <ul>
+              <li>21.-23. September 2019 <a href="https://2019.stateofthemap.org">State of the Map</a></li>
+              <li>16.-17. November 2019 <a href="https://accessibility-club.org/event/accessibility-club-summit-2019">Accessibility Club Summit 2019</a> Berlin</li>
+              <li>26.-30. Dezember 2019 <a href="https://events.ccc.de/congress/2019">35C3</a></li>
+              <li>Anfang März 2020 <a href="https://prototypefund.de/">Prototypefund Demo Day</a></li>
+              <li>Mitte März 2020 <a href="https://chemnitzer.linux-tage.de">Chemnitzer Linux-Tage</a></li>
+            </ul>
+            <p>Du erreichst uns <a href="https://github.com/multimodalrouting">auf Github</a> oder <a href="mailto:routing@johannesloetzsch.de">per Mail</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-	<p>Indem mehrere <b>alternative Routen</b> vorgeschlagen und relevante Unterschiede ansprechend visualisiert werden, wird dazu beigetragen, dass <b>selbstbestimmte, informierte Entscheidungen</b> getroffen werden können. <b>Individuelle Bedürfnisse von Fahrer und Fahrzeug</b> sollen gleichermaßen <b>flexibel und nutzerfreundlich</b> angepasst werden können.</p>
+    <div class="page" id="/konzept" menuentry="Konzept">
+      <p>Die Community um <a href="https://openstreetmap.org"><b>OpenStreetMap</b></a> und <a href="https://wheelmap.org"><b>Wheelmap</b></a> pflegt eine umfangreiche Sammlung <b>freier Daten über Barrierefreiheit</b>, die für <b>Rollstuhlfahrer und Lastenräder</b> sehr nützlich sind.</p>
+      <p>Wir entwickeln eine Routingengine, die <b>Navigation für kombinierte Nutzung von nichtmotorisiertem Individualverkehr und öffentlichen Verkehrsmitteln</b> unterstützt.
+      <p>Damit körperlich eingeschränkte Menschen <b>effizient und selbstständig</b> am Verkehr teilnehmen können, bemühen wir uns alle relevanten Informationen (z.B. <b>Wegbeschaffenheit, Hindernisse, nicht funktionierende Fahrstühle, Ausfälle/Umleitungen im ÖPNV</b>) zu berücksichtigen.</p>
+      <center><img src="Logoentwurf.svg" width="20%"/></center>
+      <p>Indem mehrere <b>alternative Routen</b> vorgeschlagen und relevante Unterschiede ansprechend visualisiert werden, wird dazu beigetragen, dass <b>selbstbestimmte, informierte Entscheidungen</b> getroffen werden können. <b>Individuelle Bedürfnisse von Fahrer und Fahrzeug</b> sollen gleichermaßen <b>flexibel und nutzerfreundlich</b> angepasst werden können.</p>
+      <p>Die Berücksichtigung von Barrierefreiheit und der Bedarf an individuelleren Routingprofilen besteht auch für Lastenräder. Aus bestehenden Projekten existieren <a href="https://www.timmitransport.de/partners">Beziehungen zu vielen <b>regionalen Fahrradkurieren</b></a>. In Zusammenarbeit mit diesen ist eine Weiterentwicklung nach dem Förderungszeitraum geplant. Durch geeignete <b>freie Software</b> wollen wir <b>alternative Innenstadtlogistikkonzepte</b> unterstützen. Mittelbar wollen wir zu <b>Emissionseinsparungen</b> von Fahrradlogistikern im Vergleich zu motorisierten Kurieren beitragen.</p>
+    </div>
 
-	<p>Die Berücksichtigung von Barrierefreiheit und der Bedarf an individuelleren Routingprofilen besteht auch für Lastenräder. Aus bestehenden Projekten existieren <a href="https://www.timmitransport.de/partners">Beziehungen zu vielen <b>regionalen Fahrradkurieren</b></a>. In Zusammenarbeit mit diesen ist eine Weiterentwicklung nach dem Förderungszeitraum geplant. Durch geeignete <b>freie Software</b> wollen wir <b>alternative Innenstadtlogistikkonzepte</b> unterstützen. Mittelbar wollen wir zu <b>Emissionseinsparungen</b> von Fahrradlogistikern im Vergleich zu motorisierten Kurieren beitragen.</p>
- </body>
+    <script src="polyglot-spa/js/compiled/app.js"></script>
+  </body>
 </html>

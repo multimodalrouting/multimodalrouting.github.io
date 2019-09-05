@@ -1,0 +1,4 @@
+[submodule "polyglot-spa"]
+	path = polyglot-spa
+	url = https://github.com/johannesloetzsch/polyglot-spa.git
+	branch = gh-pages
