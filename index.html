@@ -2,12 +2,17 @@
 <html lang="en">
   <head>
     <meta charset='utf-8'>
-    <link rel="stylesheet" href="polyglot-spa/vendor/css/bootstrap.min.css">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+    />
     <link rel="stylesheet" href="polyglot-spa/vendor/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="polyglot-spa/vendor/css/re-com.css">
+    <link rel="stylesheet" href="Semantic-UI-CSS/semantic.min.css">
     <style>
 
-      .checkbox-container label {
+      .menu label {
         display: block;
         cursor: pointer;
       }
@@ -24,24 +29,51 @@
         display: none;
       }
 
+      fieldset {
+        border: none;
+      }
+
+      .ui.grid > .row h3.header {
+        margin-bottom: 0;
+        margin-top: 40px;
+      }
+      .ui.grid > .row .ui.item.menu {
+        border: none;
+      }
+      .ui.grid > .row .ui.item.menu .item {
+        background-image: linear-gradient(to bottom, #f5f5f5 0, #e5e5e5 100%);
+        border: 1px solid #d5d5d5;
+        border-left-color: white;
+      }
+      .ui.grid > .row .ui.item.menu .item:focus {
+        border-left: 0px none #777777;
+        box-shadow: inset 1px 4px 7px rgba(0, 0, 0, 0.15);
+      }
+
+
     </style>
 
     <title>Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker</title>
   </head>
   <body>
-    <div id="menu">
-      <div class="checkbox-container">
-        <a href="#/home"><label for="home-menu-item">Home</label></a>
-        <a href="#/konzept"><label for="konzept-menu-item">Konzept</label></a>
+  <div class="ui stackable grid container">
+    <div class="row">
+      <h3 class="ui large header">Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker</h3>
+      <div class="ui two item fluid stackable huge menu">
+        <label tabindex="1" class="item" for="home-menu-item">Home</label>
+        <label tabindex="2" class="item" for="konzept-menu-item">Konzept</label>
       </div>
     </div>
-    <fieldset>
+  <div class="ui hidden section divider"></div>
+
+  <fieldset>
     <input type="radio" checked id="home-menu-item" name="menu-checkbox" class="menu-checkbox home-menu-entry">
-    <div class="page container-fluid" id="/home" menuentry="Home">
-      <div class="row">
-        <div class="panel col-md-6">
+    <div class=" row page container-fluid" id="/home" menuentry="Home">
+      <div class="ui stackable celled grid container">
+      <div class="two column row">
+        <div class="panel column">
           <div class="panel-body">
-            <p><h5 class="panel-title">Navigation für Rollstuhlfahrer</h5></p>
+            <p><h3 class="ui title">Navigation für Rollstuhlfahrer</h3></p>
             <p><img src="lego-prototyp.jpeg" class="card-img-top" width="100%"/></p>
             <ul>
               <li>Wir schreiben eine Navigationsanwendung, die Hindernisse visualisiert.</li>
@@ -50,25 +82,25 @@
             </ul>
           </div>
         </div>
-        <div class="panel col-md-6">
+        <div class="panel column">
           <div class="panel-body">
-            <p><h5 class="panel-title">Berücksichtigung vorhandener Daten</h5></p>
+            <p><h3 class="ui title">Berücksichtigung vorhandener Daten</h3></p>
             <p><img src="lego-prototyp.gif" class="card-img-top" width="100%"/></p>
             <p>Unsere Anwendung schlägt ÖPNV-Verbindungen vor, achtet dabei auf Barrierefreien Ein-/Ausstieg und welche Fahrstühle derzeit funktionieren.</p>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="panel col-md-6">
+      <div class="two column row">
+        <div class="panel column">
           <div class="panel-body">
-            <p><h5 class="panel-title">Aktueller Stand</h5></p>
+            <p><h3 class="ui title">Aktueller Stand</h3></p>
             <p>Von September 2019 bis Februar 2020 werden wir im Rahmen des <a href="https://prototypefund.de/project/multimodale-routing-engine-fuer-rollstuhlfahrer-und-fahrradlogistiker/">Prototype Funds</a> gefördert.</p>
             <p>Wir haben gerade erst mit dem Projekt begonnen. Alle Entwicklungen findest du auf <a href="https://github.com/multimodalrouting">Github</a>.</p>
           </div>
         </div>
-        <div class="panel col-md-6">
+        <div class="panel column">
           <div class="panel-body">
-            <p><h5 class="panel-title">Triff uns</h5></p>
+            <p><h3 class="ui title">Triff uns</h3></p>
             <ul>
               <li>21.-23. September 2019 <a href="https://2019.stateofthemap.org">State of the Map</a></li>
               <li>16.-17. November 2019 <a href="https://accessibility-club.org/event/accessibility-club-summit-2019">Accessibility Club Summit 2019</a> Berlin</li>
@@ -80,10 +112,11 @@
           </div>
         </div>
       </div>
+      </div>
     </div>
 
     <input type="radio" id="konzept-menu-item" name="menu-checkbox" class="menu-checkbox home-menu-entry">
-    <div class="page" id="/konzept" menuentry="Konzept">
+    <div class="row page" id="/konzept" menuentry="Konzept">
       <p>Die Community um <a href="https://openstreetmap.org"><b>OpenStreetMap</b></a> und <a href="https://wheelmap.org"><b>Wheelmap</b></a> pflegt eine umfangreiche Sammlung <b>freier Daten über Barrierefreiheit</b>, die für <b>Rollstuhlfahrer und Lastenräder</b> sehr nützlich sind.</p>
       <p>Wir entwickeln eine Routingengine, die <b>Navigation für kombinierte Nutzung von nichtmotorisiertem Individualverkehr und öffentlichen Verkehrsmitteln</b> unterstützt.
       <p>Damit körperlich eingeschränkte Menschen <b>effizient und selbstständig</b> am Verkehr teilnehmen können, bemühen wir uns alle relevanten Informationen (z.B. <b>Wegbeschaffenheit, Hindernisse, nicht funktionierende Fahrstühle, Ausfälle/Umleitungen im ÖPNV</b>) zu berücksichtigen.</p>
@@ -91,8 +124,9 @@
       <p>Indem mehrere <b>alternative Routen</b> vorgeschlagen und relevante Unterschiede ansprechend visualisiert werden, wird dazu beigetragen, dass <b>selbstbestimmte, informierte Entscheidungen</b> getroffen werden können. <b>Individuelle Bedürfnisse von Fahrer und Fahrzeug</b> sollen gleichermaßen <b>flexibel und nutzerfreundlich</b> angepasst werden können.</p>
       <p>Die Berücksichtigung von Barrierefreiheit und der Bedarf an individuelleren Routingprofilen besteht auch für Lastenräder. Aus bestehenden Projekten existieren <a href="https://www.timmitransport.de/partners">Beziehungen zu vielen <b>regionalen Fahrradkurieren</b></a>. In Zusammenarbeit mit diesen ist eine Weiterentwicklung nach dem Förderungszeitraum geplant. Durch geeignete <b>freie Software</b> wollen wir <b>alternative Innenstadtlogistikkonzepte</b> unterstützen. Mittelbar wollen wir zu <b>Emissionseinsparungen</b> von Fahrradlogistikern im Vergleich zu motorisierten Kurieren beitragen.</p>
     </div>
-    </fieldset>
+  </fieldset>
 
+  </div>
     <script src="polyglot-spa/js/compiled/app.js"></script>
   </body>
 </html>

@@ -2,3 +2,6 @@
 	path = polyglot-spa
 	url = https://github.com/johannesloetzsch/polyglot-spa.git
 	branch = gh-pages
+[submodule "Semantic-UI-CSS"]
+	path = Semantic-UI-CSS
+	url = https://github.com/Semantic-Org/Semantic-UI-CSS.git
