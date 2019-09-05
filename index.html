@@ -5,12 +5,38 @@
     <link rel="stylesheet" href="polyglot-spa/vendor/css/bootstrap.min.css">
     <link rel="stylesheet" href="polyglot-spa/vendor/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="polyglot-spa/vendor/css/re-com.css">
+    <style>
+
+      .checkbox-container label {
+        display: block;
+        cursor: pointer;
+      }
+
+      .menu-checkbox:checked + .page {
+        display: block;
+      }
+
+      .page {
+        display: none;
+      }
+
+      .menu-checkbox {
+        display: none;
+      }
+
+    </style>
 
     <title>Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker</title>
   </head>
   <body>
-    <div id="menu"></div>
-
+    <div id="menu">
+      <div class="checkbox-container">
+        <a href="#/home"><label for="home-menu-item">Home</label></a>
+        <a href="#/konzept"><label for="konzept-menu-item">Konzept</label></a>
+      </div>
+    </div>
+    <fieldset>
+    <input type="radio" checked id="home-menu-item" name="menu-checkbox" class="menu-checkbox home-menu-entry">
     <div class="page container-fluid" id="/home" menuentry="Home">
       <div class="row">
         <div class="panel col-md-6">
@@ -56,6 +82,7 @@
       </div>
     </div>
 
+    <input type="radio" id="konzept-menu-item" name="menu-checkbox" class="menu-checkbox home-menu-entry">
     <div class="page" id="/konzept" menuentry="Konzept">
       <p>Die Community um <a href="https://openstreetmap.org"><b>OpenStreetMap</b></a> und <a href="https://wheelmap.org"><b>Wheelmap</b></a> pflegt eine umfangreiche Sammlung <b>freier Daten über Barrierefreiheit</b>, die für <b>Rollstuhlfahrer und Lastenräder</b> sehr nützlich sind.</p>
       <p>Wir entwickeln eine Routingengine, die <b>Navigation für kombinierte Nutzung von nichtmotorisiertem Individualverkehr und öffentlichen Verkehrsmitteln</b> unterstützt.
@@ -64,6 +91,7 @@
       <p>Indem mehrere <b>alternative Routen</b> vorgeschlagen und relevante Unterschiede ansprechend visualisiert werden, wird dazu beigetragen, dass <b>selbstbestimmte, informierte Entscheidungen</b> getroffen werden können. <b>Individuelle Bedürfnisse von Fahrer und Fahrzeug</b> sollen gleichermaßen <b>flexibel und nutzerfreundlich</b> angepasst werden können.</p>
       <p>Die Berücksichtigung von Barrierefreiheit und der Bedarf an individuelleren Routingprofilen besteht auch für Lastenräder. Aus bestehenden Projekten existieren <a href="https://www.timmitransport.de/partners">Beziehungen zu vielen <b>regionalen Fahrradkurieren</b></a>. In Zusammenarbeit mit diesen ist eine Weiterentwicklung nach dem Förderungszeitraum geplant. Durch geeignete <b>freie Software</b> wollen wir <b>alternative Innenstadtlogistikkonzepte</b> unterstützen. Mittelbar wollen wir zu <b>Emissionseinsparungen</b> von Fahrradlogistikern im Vergleich zu motorisierten Kurieren beitragen.</p>
     </div>
+    </fieldset>
 
     <script src="polyglot-spa/js/compiled/app.js"></script>
   </body>
