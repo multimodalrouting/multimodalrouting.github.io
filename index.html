@@ -1,95 +1,786 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset='utf-8'>
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
-    <meta
+<head>
+  <meta charset='utf-8'>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
-    />
-    <link rel="stylesheet" href="polyglot-spa/vendor/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="polyglot-spa/vendor/css/re-com.css">
-    <link rel="stylesheet" href="Semantic-UI-CSS/semantic.min.css">
-    <style>
+  />
+  <link rel="stylesheet" href="polyglot-spa/vendor/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="polyglot-spa/vendor/css/re-com.css">
+  <link rel="stylesheet" href="Semantic-UI-CSS/semantic.min.css">
+  <link rel="stylesheet" href="timeline.css">
 
-      .menu label {
-        display: block;
-        cursor: pointer;
+
+  <style>
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-font-smoothing: grayscale;
+    }
+
+    .hidden.menu {
+      display: none;
+    }
+
+    .ui.inverted.masthead.segment {
+      background-color: black;
+    }
+
+    .masthead.segment {
+      min-height: 600px;
+      padding: 1em 0em;
+    }
+
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+
+    .masthead h1.ui.header {
+      margin-top: 2em;
+      margin-bottom: 0em;
+      font-size: 4em;
+      font-weight: normal;
+    }
+
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+    }
+
+    .ui.vertical.stripe {
+      padding: 8em 0em;
+    }
+
+    .ui.vertical.stripe h3 {
+      font-size: 2em;
+    }
+
+    .ui.vertical.stripe .button + h3,
+    .ui.vertical.stripe p + h3 {
+      margin-top: 3em;
+    }
+
+    .ui.vertical.stripe .floated.image {
+      clear: both;
+    }
+
+    .ui.vertical.stripe p {
+      font-size: 1.33em;
+    }
+
+    .ui.vertical.stripe .horizontal.divider {
+      margin: 3em 0em;
+    }
+
+    .quote.stripe.segment {
+      padding: 0em;
+    }
+
+    .quote.stripe.segment .grid .column {
+      padding-top: 5em;
+      padding-bottom: 5em;
+    }
+
+    .footer.segment {
+      padding: 5em 0em;
+    }
+
+    .secondary.pointing.menu .toc.item {
+      display: none;
+    }
+
+    @media only screen and (max-width: 700px) {
+      .ui.fixed.menu {
+        display: none !important;
       }
 
-      .menu-checkbox:checked + .page {
-        display: block;
-      }
-
-      .page {
+      .secondary.pointing.menu .item,
+      .secondary.pointing.menu .menu {
         display: none;
       }
 
-      .menu-checkbox {
-        display: none;
+      .secondary.pointing.menu .toc.item {
+        display: block;
       }
 
-      fieldset {
-        border: none;
+      .masthead.segment {
+        min-height: 350px;
       }
 
-      .ui.grid > .row h3.header {
-        margin-bottom: 0;
-        margin-top: 40px;
-      }
-      .ui.grid > .row .ui.item.menu {
-        border: none;
-      }
-      .ui.grid > .row .ui.item.menu .item {
-        background-image: linear-gradient(to bottom, #f5f5f5 0, #e5e5e5 100%);
-        border: 1px solid #d5d5d5;
-        border-left-color: white;
-      }
-      .ui.grid > .row .ui.item.menu .item:focus {
-        border-left: 0px none #777777;
-        box-shadow: inset 1px 4px 7px rgba(0, 0, 0, 0.15);
+      .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
       }
 
+      .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+      }
+    }
 
-    </style>
+    .fullscreen-video-wrap {
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: 540px;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-    <title>Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker</title>
-  </head>
-  <body>
-  <div class="ui stackable grid container">
-    <div class="row">
-      <h3 class="ui large header">Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker</h3>
-      <div class="ui two item fluid stackable huge menu">
-        <label tabindex="1" class="item" for="home-menu-item">Home</label>
-        <label tabindex="2" class="item" for="konzept-menu-item">Konzept</label>
+    .fullscreen-video-wrap video {
+      margin-top: -7vw;
+      max-width: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .video-overlay {
+      position: absolute;
+      z-index: 2;
+    }
+
+    .ui.modal.mobile .header {
+      background-color: black;
+      color: white;
+    }
+
+    .ui.modal.mobile {
+      width: auto;
+      background-color: black;
+      color: white;
+    }
+
+    .ui.modal.mobile .content {
+      padding: 4px 4px 4px 4px;
+      width: 504px;
+      height: 904px;
+      max-width: 85vw;
+      max-height: 85vh;
+    }
+
+    .mobile-app {
+      max-width: 83vw;
+      max-height: 83vh;
+      width: 500px;
+      height: 800px;
+      border: none;
+    }
+
+  </style>
+
+  <title>Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker</title>
+</head>
+<body>
+<div class="ui large top fixed hidden menu">
+  <div class="ui container">
+    <a class="active item" href="#">Home</a> <a class="item" href="#konzeptChapter">Konzept</a>
+    <a class="item" href="#meetusChapter">Triff Uns</a> <a class="item" href="#timelineChapter">Logs</a> <a class="item">GitHub</a>
+
+    <div class="right menu">
+      <div class="item"><a class="ui button">Log in</a></div>
+      <div class="item"><a class="ui primary button">Sign Up</a></div>
+    </div>
+  </div>
+</div>
+<!--Sidebar Menu-->
+<div class="ui vertical inverted sidebar menu">
+  <a class="active item" href="#">Multimodales Routing</a>
+  <a class="item" href="#newsChapter">Neuigkeiten</a>
+  <a class="item" href="#konzeptChapter">Konzept</a>
+  <a class="item" href="#meetusChapter">Triff uns</a>
+  <a class="item" href="#root">Code</a>
+  <a class="item" href="#about">About</a>
+</div>
+<!--Page Contents-->
+<div class="pusher">
+
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="ui container">
+      <div class="ui large secondary inverted pointing menu">
+        <a class="toc item"><i class="sidebar icon"></i></a>
+        <a class="active item" href="#">Home</a> <a class="item" href="#konzeptChapter">Konzept</a>
+        <a class="item" href="#meetusChapter">Triff Uns</a> <a class="item" href="#timelineChapter">Logs</a> <a class="item">GitHub</a>
+        <div class="right item">
+          <a class="ui inverted button">Log in</a>
+          <a class="ui inverted button">Sign Up</a>
+        </div>
       </div>
     </div>
-  <div class="ui hidden section divider"></div>
+    <div class="ui text container">
+      <div class="foullscreen-video-wrap">
+        <!--<video src="wheelchair.webm" muted autoplay="" loop="">
+        </video>-->
+      </div>
+      <div class="video-overlay">
+        <h1 class="ui inverted header">Multimodal Routing</h1>
+        <h2>
 
-  <fieldset>
-    <input type="radio" checked id="home-menu-item" name="menu-checkbox" class="menu-checkbox home-menu-entry">
+          Multimodale Routing Engine für Rollstuhlfahrer und Fahrradlogistiker
+
+        </h2>
+        <div class="ui huge primary button get-started">
+          Get Started <i class="right arrow icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">Navigation für Rollstuhlfahrer</h3>
+          <p>
+          <ul class="ui list large">
+            <li>Wir schreiben eine Navigationsanwendung, die Hindernisse visualisiert.</li>
+            <li>Du entscheidest welche Alternativroute für dich die beste ist.</li>
+            <li>Die Anwendung lernt aus deinen Entscheidungen um bei künftigen Routenvorschlägen auf deine
+              Bedürfnisse einzugehen.
+            </li>
+          </ul>
+          </p>
+          <p>
+          <h3 class="ui title">Aktueller Stand</h3></p>
+          <p>Von September 2019 bis Februar 2020 werden wir im Rahmen des <a
+              href="https://prototypefund.de/project/multimodale-routing-engine-fuer-rollstuhlfahrer-und-fahrradlogistiker/">Prototype
+            Funds</a> gefördert.</p>
+          <p>Wir haben gerade erst mit dem Projekt begonnen. Alle Entwicklungen findest du auf <a
+              href="https://github.com/multimodalrouting">Github</a>.</p>
+        </div>
+        <div class="six wide right floated column">
+
+          <h3 class="ui title">Berücksichtigung vorhandener Daten</h3></p>
+          <p>Unsere Anwendung schlägt ÖPNV-Verbindungen vor, achtet dabei auf Barrierefreien Ein-/Ausstieg und
+            welche Fahrstühle derzeit funktionieren.</p>
+          <p><img src="lego-prototyp.jpeg" class="card-img-top" width="100%"/></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="center aligned column">
+          <a class="ui huge button" href="https://github.com/multimodalrouting">Git Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <h3>"What a brillinat project"</h3>
+          <p>That is what they all say about us</p>
+        </div>
+        <div class="column">
+          <h3>"I shouldn't have gone with their competitor."</h3>
+          <p>
+            <img
+                class="ui avatar image"
+                src="./static/images/avatar/nan.jpg"
+            />
+            <b>Nan</b> Chief Fun Developer
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui text container">
+      <h3 class="ui header" id="konzeptChapter">Das Konzept</h3>
+      <p>Die Community um <a href="https://openstreetmap.org"><b>OpenStreetMap</b></a> und <a
+          href="https://wheelmap.org"><b>Wheelmap</b></a> pflegt eine umfangreiche Sammlung <b>freier Daten über
+        Barrierefreiheit</b>, die für <b>Rollstuhlfahrer und Lastenräder</b> sehr nützlich sind.</p>
+      <p>Wir entwickeln eine Routingengine, die <b>Navigation für kombinierte Nutzung von nichtmotorisiertem
+        Individualverkehr und öffentlichen Verkehrsmitteln</b> unterstützt.
+      <p>Damit körperlich eingeschränkte Menschen <b>effizient und selbstständig</b> am Verkehr teilnehmen können,
+        bemühen wir uns alle relevanten Informationen (z.B. <b>Wegbeschaffenheit, Hindernisse, nicht funktionierende
+          Fahrstühle, Ausfälle/Umleitungen im ÖPNV</b>) zu berücksichtigen.</p>
+      <center><img src="Logoentwurf.svg" width="20%"/></center>
+      <div class="ui divider"></div>
+      <p>Indem mehrere <b>alternative Routen</b> vorgeschlagen und relevante Unterschiede ansprechend visualisiert
+        werden, wird dazu beigetragen, dass <b>selbstbestimmte, informierte Entscheidungen</b> getroffen werden
+        können. <b>Individuelle Bedürfnisse von Fahrer und Fahrzeug</b> sollen gleichermaßen <b>flexibel und
+          nutzerfreundlich</b> angepasst werden können.</p>
+      <p>Die Berücksichtigung von Barrierefreiheit und der Bedarf an individuelleren Routingprofilen besteht auch
+        für Lastenräder. Aus bestehenden Projekten existieren <a href="https://www.timmitransport.de/partners">Beziehungen
+          zu vielen <b>regionalen Fahrradkurieren</b></a>. In Zusammenarbeit mit diesen ist eine Weiterentwicklung
+        nach dem Förderungszeitraum geplant. Durch geeignete <b>freie Software</b> wollen wir <b>alternative
+          Innenstadtlogistikkonzepte</b> unterstützen. Mittelbar wollen wir zu <b>Emissionseinsparungen</b> von
+        Fahrradlogistikern im Vergleich zu motorisierten Kurieren beitragen.</p>
+      <a class="ui large button">Read More</a>
+      <h4 class="ui horizontal header divider">
+        <a href="#root"> Case Studies</a>
+      </h4>
+    </div>
+
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui text container">
+      <h4 class="ui header">Termine</h4>
+      <p>
+      <h3 class="ui title" id="meetusChapter">Triff uns vor Ort</h3></p>
+      <p>
+        <ul class="ui large list">
+          <li>21.-23. September 2019 <a href="https://2019.stateofthemap.org">State of the Map</a></li>
+          <li>16.-17. November 2019 <a href="https://accessibility-club.org/event/accessibility-club-summit-2019">Accessibility
+            Club Summit 2019</a> Berlin
+          </li>
+          <li>26.-30. Dezember 2019 <a href="https://events.ccc.de/congress/2019">35C3</a></li>
+          <li>Anfang März 2020 <a href="https://prototypefund.de/">Prototypefund Demo Day</a></li>
+          <li>Mitte März 2020 <a href="https://chemnitzer.linux-tage.de">Chemnitzer Linux-Tage</a></li>
+        </ul>
+      </p>
+      <p>Du erreichst uns <a href="https://github.com/multimodalrouting">auf Github</a> oder <a
+          href="mailto:routing@johannesloetzsch.de">per Mail</a>.</p>
+      <h4 class="ui header">Wo sonst?</h4>
+      <div class="ui list">
+        <a class="item">GitHub</a> <a class="item">mastodon</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe segment timeline">
+
+    <div class="container" id="timelineChapter">
+      <div class="header">
+        <img src="MultimodalRoutingLogo.png" alt="Multimodal routing logo">
+        <h1>Projektentwicklung & Milestones</h1>
+        <h2>Projektlog, builds, achievements</h2>
+      </div>
+      <div class="item">
+        <div id="timeline">
+          <div>
+            <section class="year">
+              <h3>2007</h3>
+              <section>
+                <ul>
+                  <li>Satoshi Nakamoto began working on the Bitcoin concept.</li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2008</h3>
+              <section>
+                <h4>August</h4>
+                <ul>
+                  <li>Neal Kin, Vladimir Oksman, and Charles Bry file an application for an encryption patent application.</li>
+                  <li>Bitcoin.org was registered at <a href="https://anonymousspeech.com/">anonymousspeech.com</a>.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>October</h4>
+                <ul>
+                  <li>Nakamoto describes the Bitcoin currency and solves the problem of double spending.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>November</h4>
+                <ul>
+                  <li>The Bitcoin project is registered on <a href="https://sourceforge.net/">SourceForge.net</a>.</li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2009</h3>
+              <section>
+                <h4>January</h4>
+                <ul>
+                  <li>Block 0 is established.</li>
+                  <li>Version 0.1 of Bitcoin is released.</li>
+                  <li>The first Bitcoin transaction.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>October</h4>
+                <ul>
+                  <li>An exchange rate is established.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>December</h4>
+                <ul>
+                  <li>Version 0.2 is released.</li>
+                  <li>The difficulty increases.</li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2010</h3>
+              <section>
+                <h4>February</h4>
+                <ul>
+                  <li>The Bitcoin Market is established as a Bitcoin currency exchange.</li>
+                  <li>Encryption patent is published.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>May</h4>
+                <ul>
+                  <li>The first real-world transaction using 10,000 BTC spent on pizza.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>July</h4>
+                <ul>
+                  <li>Version 0.3 released.</li>
+                  <li>In five days, the price grew 1000%, rising from <span class="price">$0.008</span> to  <span class="price">$0.08</span> for 1 bitcoin.</li>
+                  <li>The MtGox Bitcoin currency exchange market is established.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>August</h4>
+                <ul>
+                  <li>Exploit generates 184 billion Bitcoins.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>October</h4>
+                <ul>
+                  <li>Financial task force issues warning.</li>
+                  <li>The first public version of an OpenCL miner is released.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>November</h4>
+                <ul>
+                  <li>Market cap exceeds $1 million USD.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>December</h4>
+                <ul>
+                  <li>Bitcoind compiled for Nokia N900.</li>
+                  <li>First mobile Bitcoin transaction.</li>
+                  <li>Difficulty increases.</li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2011</h3>
+              <section>
+                <h4>January</h4>
+                <ul>
+                  <li>Silk Road opens for business.</li>
+                  <li>25% of total Bitcoins generated.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>February</h4>
+                <ul>
+                  <li>Bitcoin reaches parity with US dollar.</li>
+                  <li><a href="https://weusecoins.com/">WeUseCoins.com</a> is created.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>March</h4>
+                <ul>
+                  <li>Second largest decrease in difficulty.</li>
+                  <li>Britcoin opens for trading.</li>
+                  <li>Bitcoin Brasil opens.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>April</h4>
+                <ul>
+                  <li>Bitcoin passes parity with Euro.</li>
+                  <li>Difficulty surpasses 100,000.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>June</h4>
+                <ul>
+                  <li>Bitcoin Market drops PayPal.</li>
+                  <li>The largest percentage price decrease to-date became known as the Great Bubble of 2011. Top of bubble at <span class="price">$31.</span></li>
+                  <li>WikiLeaks starts accepting Bitcoin.</li>
+                  <li>Major breach of security at MtGox.</li>
+                  <li>Difficulty passes 1 million.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>August</h4>
+                <ul>
+                  <li>Bitcoin Conference and World Expo in New York City, NY.</li>
+                  <li>P2Pool mines its first block.</li>
+                  <li>Back-to-back drop in difficulty.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>September</h4>
+                <ul>
+                  <li>Casascius coins mint physical Bitcoins.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>November</h4>
+                <ul>
+                  <li>Bitcoin & Future Technology European Conference in Prague, Czech Republic.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>December</h4>
+                <ul>
+                  <li><span class="price">$2</span> minimum price after the first price drop.</li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2012</h3>
+              <section>
+                <h4>September</h4>
+                <ul>
+                  <li>London 2012 Bitcoin Conference.</li>
+                  <li>Bitcoin Foundation begins.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>December</h4>
+                <ul>
+                  <li>Slowly rising for a year. Price at <span class="price">$13.</span></li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2013</h3>
+              <section>
+                <h4>February</h4>
+                <ul>
+                  <li>Version 0.8 released.</li>
+                  <li>Bitcoin goes up to <span class="price">$30.</span></li>
+                </ul>
+              </section>
+              <section>
+                <h4>March</h4>
+                <ul>
+                  <li>Bitcoin spikes to $74.90.</li>
+                  <li>Market cap reaches $1 billion.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>April</h4>
+                <ul>
+                  <li>Bitcoin surpasses <span class="price">$100.</span></li>
+                  <li>Price hits an all-time high of <span class="price">$266.</span></li>
+                  <li>Bitcoin Central is hacked.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>May</h4>
+                <ul>
+                  <li>First Bitcoin ATM unveiled.</li>
+                  <li>Bitcoin Central gets hacked again.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>October</h4>
+                <ul>
+                  <li>FBI shuts down Silk Road.</li>
+                  <li>Bitcoin price drops from <span class="price">$139</span> to <span class="price">$109.71</span> in less than three hours after Silk Road closure, recovers.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>November</h4>
+                <ul>
+                  <li>Bitcoin price surges to a new all-time record of <span class="price">$1242.</span></li>
+                </ul>
+              </section>
+              <section>
+                <h4>December</h4>
+                <ul>
+                  <li>Price crashed to <span class="price">$600</span>, rebounded to <span class="price">$1000</span>, crashed again to the <span class="price">$500</span> range. Stabilized in between.</li>
+                  <li>China's Central Bank bans Bitcoin transactions.</li>
+                  <li>The network exceeded 10 petahash/sec.</li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2014</h3>
+              <section>
+                <h4>January</h4>
+                <ul>
+                  <li>Price spiked to <span class="price">$1000</span>, then settled in the <span class="price">$800–$900</span>range.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>March</h4>
+                <ul>
+                  <li>Version 0.9 released.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>June</h4>
+                <ul>
+                  <li>The network exceeded 100 petahash/sec.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>December</h4>
+                <ul>
+                  <li>Microsoft began to accept bitcoin to buy Xbox games and Windows apps.</li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2015</h3>
+              <section>
+                <h4>February</h4>
+                <ul>
+                  <li>Version 0.10 released.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>July</h4>
+                <ul>
+                  <li>Version 0.11 released.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>November</h4>
+                <ul>
+                  <li>2015 record high of <span class="price">$504.</span></li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2016</h3>
+              <section>
+                <h4>January</h4>
+                <ul>
+                  <li>Price at <span class="price">$1150</span> per bitcoin.</li>
+                  <li>Price fell 30% in a week, reaching a multi-month low of <span class="price">$750.</span></li>
+                  <li>The network exceeded 1 exahash/sec.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>February</h4>
+                <ul>
+                  <li>Version 0.12 released.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>April</h4>
+                <ul>
+                  <li>Steam started accepting bitcoin as payment.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>August</h4>
+                <ul>
+                  <li>Version 0.13 released.</li>
+                </ul>
+              </section>
+              <section>
+                <h4>September</h4>
+                <ul>
+                  <li>There are 770 bitcoin ATMs worldwide.</li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2017</h3>
+              <section>
+                <h4>March</h4>
+                <ul>
+                  <li>Version 0.14 released.</li>
+                  <li>The price of 1 bitcoin surpassed the spot price of an ounce of gold for the first time.</li>
+                  <li>The number of GitHub projects related to bitcoin passed 10,000.</li>
+                  <li>Price traded above <span class="price">$1290.</span></li>
+                </ul>
+              </section>
+              <section>
+                <h4>April</h4>
+                <ul>
+                  <li>Japan Declares Bitcoin as Legel Tender</li>
+                </ul>
+              </section>
+              <section>
+                <h4>August</h4>
+                <ul>
+                  <li>Bitcoin "splits" into Bitcoin (BTC) and Bitcoin Cash (BCH)</li>
+                </ul>
+              </section>
+              <section>
+                <h4>November</h4>
+                <ul>
+                  <li>Bitcoin for the first time hit <span class="price">$10,000</span></li>
+                </ul>
+              </section>
+            </section>
+            <section class="year">
+              <h3>2018</h3>
+              <section>
+                <h4>Today</h4>
+                <ul>
+                  <li>At the moment, one bitcoin cost:
+                    <span class="price">
+                  <div id="price"></div>.
+                </span>
+                  </li>
+                </ul>
+              </section>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div
+          class="ui stackable inverted divided equal height stackable grid"
+      >
+        <div class="three wide column">
+          <h4 class="ui inverted header">About</h4>
+          <div class="ui inverted link list">
+            <a class="item" href="#root">Sitemap</a>
+            <a class="item" href="#root">Contact Us</a>
+            <a class="item" href="#root">Religious Ceremonies</a>
+            <a class="item" href="#root">Gazebo Plans</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Services</h4>
+          <div class="ui inverted link list">
+            <a class="item" href="#root">Banana Pre-Order</a>
+            <a class="item" href="#root">DNA FAQ</a>
+            <a class="item" href="#root">How To Access</a>
+            <a class="item" href="#root">Favorite X-Men</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Footer Header</h4>
+          <p>
+            Extra space for a call to action inside the footer that could
+            help re-engage users.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="ui modal mobile">
+    <div class="header">The App</div>
+    <div class="content">
+    </div>
+  </div>
+
+</div>
+<!--V
+
     <div class=" row page container-fluid" id="/home" menuentry="Home">
       <div class="ui stackable celled grid container">
       <div class="two column row">
-        <div class="panel column">
-          <div class="panel-body">
-            <p><h3 class="ui title">Navigation für Rollstuhlfahrer</h3></p>
-            <p><img src="lego-prototyp.jpeg" class="card-img-top" width="100%"/></p>
-            <ul>
-              <li>Wir schreiben eine Navigationsanwendung, die Hindernisse visualisiert.</li>
-              <li>Du entscheidest welche Alternativroute für dich die beste ist.</li>
-              <li>Die Anwendung lernt aus deinen Entscheidungen um bei künftigen Routenvorschlägen auf deine Bedürfnisse einzugehen.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="panel column">
-          <div class="panel-body">
-            <p><h3 class="ui title">Berücksichtigung vorhandener Daten</h3></p>
-            <p><img src="lego-prototyp.gif" class="card-img-top" width="100%"/></p>
-            <p>Unsere Anwendung schlägt ÖPNV-Verbindungen vor, achtet dabei auf Barrierefreien Ein-/Ausstieg und welche Fahrstühle derzeit funktionieren.</p>
-          </div>
-        </div>
-      </div>
       <div class="two column row">
         <div class="panel column">
           <div class="panel-body">
@@ -115,18 +806,40 @@
       </div>
     </div>
 
-    <input type="radio" id="konzept-menu-item" name="menu-checkbox" class="menu-checkbox home-menu-entry">
-    <div class="row page" id="/konzept" menuentry="Konzept">
-      <p>Die Community um <a href="https://openstreetmap.org"><b>OpenStreetMap</b></a> und <a href="https://wheelmap.org"><b>Wheelmap</b></a> pflegt eine umfangreiche Sammlung <b>freier Daten über Barrierefreiheit</b>, die für <b>Rollstuhlfahrer und Lastenräder</b> sehr nützlich sind.</p>
-      <p>Wir entwickeln eine Routingengine, die <b>Navigation für kombinierte Nutzung von nichtmotorisiertem Individualverkehr und öffentlichen Verkehrsmitteln</b> unterstützt.
-      <p>Damit körperlich eingeschränkte Menschen <b>effizient und selbstständig</b> am Verkehr teilnehmen können, bemühen wir uns alle relevanten Informationen (z.B. <b>Wegbeschaffenheit, Hindernisse, nicht funktionierende Fahrstühle, Ausfälle/Umleitungen im ÖPNV</b>) zu berücksichtigen.</p>
-      <center><img src="Logoentwurf.svg" width="20%"/></center>
-      <p>Indem mehrere <b>alternative Routen</b> vorgeschlagen und relevante Unterschiede ansprechend visualisiert werden, wird dazu beigetragen, dass <b>selbstbestimmte, informierte Entscheidungen</b> getroffen werden können. <b>Individuelle Bedürfnisse von Fahrer und Fahrzeug</b> sollen gleichermaßen <b>flexibel und nutzerfreundlich</b> angepasst werden können.</p>
-      <p>Die Berücksichtigung von Barrierefreiheit und der Bedarf an individuelleren Routingprofilen besteht auch für Lastenräder. Aus bestehenden Projekten existieren <a href="https://www.timmitransport.de/partners">Beziehungen zu vielen <b>regionalen Fahrradkurieren</b></a>. In Zusammenarbeit mit diesen ist eine Weiterentwicklung nach dem Förderungszeitraum geplant. Durch geeignete <b>freie Software</b> wollen wir <b>alternative Innenstadtlogistikkonzepte</b> unterstützen. Mittelbar wollen wir zu <b>Emissionseinsparungen</b> von Fahrradlogistikern im Vergleich zu motorisierten Kurieren beitragen.</p>
-    </div>
   </fieldset>
+-->
+<script src="polyglot-spa/js/compiled/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+<script>
 
-  </div>
-    <script src="polyglot-spa/js/compiled/app.js"></script>
-  </body>
+  $(document).ready(function () {
+    // fix menu when passed
+    //$('.fullscreen-video-wrap > video')[0].currentTime = 10;
+    //$('.fullscreen-video-wrap > video')[0].addEventListener('loadedmetadata', function () {
+      this.currentTime = 10;
+    }, false);
+    $(".get-started.button").on('click', function () {
+      console.log("click");
+      var modal = $(".ui.modal.mobile");
+      $('.content', modal).empty()
+      $('.content', modal).html('<iframe class="mobile-app" src="http://localhost:8080#/edit"></iframe>');
+      modal.modal("show");
+    });
+  });
+  $(".masthead").visibility({
+    once: false,
+    onBottomPassed: function () {
+      $(".fixed.menu").transition("fade in");
+    },
+    onBottomPassedReverse: function () {
+      $(".fixed.menu").transition("fade out");
+    }
+  });
+  // create sidebar and attach to menu open
+  $(".ui.sidebar").sidebar("attach events", ".toc.item");
+
+</script>
+
+</body>
 </html>
